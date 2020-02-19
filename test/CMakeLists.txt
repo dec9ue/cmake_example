@@ -7,8 +7,10 @@ enable_testing()
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
 ### デバッグのときだけカバレッジオプションを有効にする
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --coverage")
-set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
+if( NOT MSVC)
+   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --coverage")
+   set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
+endif()
 
 ### 実行ファイルごとの設定
 add_executable(example_test_1
@@ -51,11 +53,11 @@ ExternalProject_Add(
 	### Path to source tree
 	SOURCE_DIR ${PROJECT_BINARY_DIR}/GoogleTest_src
 	### Specify Generator
-	CMAKE_GENERATOR "Ninja"
+	### CMAKE_GENERATOR "Ninja"
 	### Add cmake args CMAKE_ARGS -DCMAKE_INSTALL_PREFIX= -DCMAKE_BUILD_TYPE=Release
 	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${DEPEND_LIB_ROOT}
 	### Path to build tree
 	BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/GoogleTest_build
-	BUILD_COMMAND ninja install
+	### BUILD_COMMAND ninja install
 )
 

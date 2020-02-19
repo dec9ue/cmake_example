@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
-enable_language(CXX)
-set(CMAKE_CXX_STANDARD 14)
+enable_language(CXX C)
+set(CMAKE_CXX_STANDARD 17)
 
 ### 依存ライブラリを外部から取得するための設定
 include(ExternalProject)
